@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:task2/authenticate/forgetPass.dart';
+import 'package:task2/authenticate/signup.dart';
+import 'package:task2/home/home.dart';
 import 'package:task2/sharedFile/textInputDecoration.dart';
 import 'package:google_fonts/google_fonts.dart';
 class LoginPage extends StatefulWidget {
@@ -56,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 Text(
-                  "GREAT DEALS ARE WAITING FOR YOU!",
+                  "GREAT DEALS ARE WAITING FOR YOU.",
                   style: TextStyle(color: HexColor("#0C9AD6"),
                     fontSize: 14.0,
                     fontWeight: FontWeight.normal,
@@ -108,6 +111,8 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               onTap: () async{
 
+                                Navigator.push(context, new MaterialPageRoute(builder: (context) => ForgetPassword() ));
+
                               },
                             ),
 
@@ -129,6 +134,10 @@ class _LoginPageState extends State<LoginPage> {
                                       style: TextStyle(color: Colors.white, fontSize: 17.0, ),
                                     ),
                                     onPressed: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        Navigator.of(context).pop();
+                                        Navigator.push(context, new MaterialPageRoute(builder: (context) => HomePage() ));
+                                    }
 
                                     },
                                   ),
@@ -155,8 +164,10 @@ class _LoginPageState extends State<LoginPage> {
                                   style: TextStyle(color: Colors.white, fontSize: 17.0, ),
                                 ),
                                 onPressed: () {
+                                    Navigator.of(context).pop();
+                                    Navigator.push(context, new MaterialPageRoute(builder: (context) => HomePage() ));
+                                  }
 
-                                },
                               ),
                             ),
                           ),
@@ -189,6 +200,9 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                               onTap: () async{
+                                Navigator.of(context).pop();
+                                Navigator.push(context, new MaterialPageRoute(builder: (context) => SignUp() ));
+
 
                               },
                             ),
