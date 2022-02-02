@@ -18,6 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   String userName = '';
   String password = '';
   String error = '';
+  bool passwordIcon = true;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -86,10 +87,18 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                           decoration:textInputDecoration.copyWith(
                             hintText: 'Password',
-                            suffixIcon: Icon(Icons.remove_red_eye, ),
+                            suffixIcon: InkWell(
+                                child: Icon(Icons.remove_red_eye, ),
+                              onTap: (){
+                                  setState(() {
+                                    passwordIcon: false;
+                                  });
+                              },
+                            ),
+
                           ),
 
-                          obscureText: true,
+                          obscureText: passwordIcon,
                           validator: (val) => val!.length < 6 ? 'Enter at lest 6 digit password' : null ,
                           onChanged: (val){
                             setState(()=> password = val);

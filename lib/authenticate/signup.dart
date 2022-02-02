@@ -3,8 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:task2/home/home.dart';
 import 'package:task2/sharedFile/textInputDecoration.dart';
-
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'login.dart';
+import 'package:country_code_picker/country_code_picker.dart';
+
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -26,6 +28,10 @@ class _SignUpState extends State<SignUp> {
   String zipCode = '';
   String checkBoxText = 'I agree to the ';
   bool checked = false;
+
+  final TextEditingController controller = TextEditingController();
+  String initialCountry = 'BD';
+  PhoneNumber number = PhoneNumber(isoCode: 'BD');
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -134,17 +140,58 @@ class _SignUpState extends State<SignUp> {
 
                       SizedBox(height: 20.0),
 
-                      TextFormField(
+                      ////////////////// contact number field start
+                      InternationalPhoneNumberInput(
+                        onInputChanged: (PhoneNumber number) {
+                          print(number.phoneNumber);
+                        },
+                        onInputValidated: (bool value) {
+                          print(value);
+                        },
+                        selectorConfig: SelectorConfig(
+                          selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                        ),
+                        ignoreBlank: false,
+                        autoValidateMode: AutovalidateMode.disabled,
+                        hintText: 'Contact Number*',
 
-                          decoration:textInputDecoration.copyWith(
-                            hintText: 'Contact Number*',
-                          ),
-                          validator: (val) => val!.isEmpty? 'Enter your Contact Number' : null ,
-                          onChanged: (val){
-                            setState(()=> contactNumber = val);
-
-                          }
+                        selectorTextStyle: TextStyle(color: Colors.black),
+                        initialValue: number,
+                        textFieldController: controller,
+                        formatInput: false,
+                        keyboardType:
+                        TextInputType.numberWithOptions(signed: true, decimal: true),
+                        inputBorder: OutlineInputBorder(),
+                        onSaved: (PhoneNumber number) {
+                          print('On Saved: $number');
+                        },
                       ),
+
+
+                      ////////////// contact number filed end
+
+                      SizedBox(height: 20.0),
+                      /////////////// test new country code picker start
+                      Padding(
+                        padding: const EdgeInsets.all(0.0),
+
+
+                        child: Container(
+                          decoration: BoxDecoration(border: Border.all(color: Colors.grey, width: 2.0,),
+                            borderRadius: BorderRadius.circular(4),
+
+                          ),
+                          child: CountryCodePicker(
+                            initialSelection: 'US',
+                            showFlagDialog: true,
+                            showCountryOnly: true,
+                            alignLeft: true,
+                            padding: EdgeInsets.fromLTRB(10,0,10,0),
+                          ),
+                        ),
+                      ),
+                      //////////// country code picker end
+
 
                       SizedBox(height: 20.0),
 
@@ -268,4 +315,14 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
+  void getPhoneNumber(String phoneNumber) async {
+    PhoneNumber number =
+    await PhoneNumber.getRegionInfoFromPhoneNumber(phoneNumber, 'US');
+
+    setState(() {
+      this.number = number;
+    });
+  }
+
 }
+
