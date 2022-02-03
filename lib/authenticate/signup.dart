@@ -89,19 +89,25 @@ class _SignUpState extends State<SignUp> {
                     children: <Widget>[
                       SizedBox(height: 20.0),
 
-                            TextFormField(
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            child: Flexible(
+                              child: TextFormField(
                                   decoration:textInputDecoration.copyWith(
                                     hintText: 'FirstName*',
                                   ),
                                   validator: (val) => val!.isEmpty? 'Enter your First Name' : null ,
                                   onChanged: (val){
                                     setState(()=> firstName = val);
-
                                   }
                               ),
-
-                            SizedBox(height: 20,),
-                                TextFormField(
+                            ),
+                          ),
+                          SizedBox(width: 20,),
+                          Container(
+                            child: Flexible(
+                              child: TextFormField( 
                                   decoration:textInputDecoration.copyWith(
                                     hintText: 'LastName*',
                                   ),
@@ -111,6 +117,12 @@ class _SignUpState extends State<SignUp> {
 
                                   }
                               ),
+                            ),
+                          )
+                        ],
+                      ),
+
+
                       SizedBox(height: 20.0),
 
                       TextFormField(
