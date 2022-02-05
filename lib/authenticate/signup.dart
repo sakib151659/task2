@@ -34,6 +34,10 @@ class _SignUpState extends State<SignUp> {
 
   final destCtrl = TextEditingController();
 
+  final zipcodeController = TextEditingController();
+
+
+
   final geoMethods = GeoMethods(
     /// [Get API key](https://developers.google.com/maps/documentation/embed/get-api-key)
     googleApiKey: 'GOOGLE_API_KEY',
@@ -288,11 +292,20 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(height: 20.0),
 
                       TextFormField(
-
+                          controller: zipcodeController,
+                          keyboardType: TextInputType.number,
                           decoration:textInputDecoration.copyWith(
                             hintText: 'Zip Code*',
-                            suffixIcon: Icon(Icons.refresh, ),
+                            suffixIcon: InkWell(
+                                child: Icon(Icons.refresh,
+                                ),
+                              onTap: (){
+                                zipcodeController.clear();
+                              },
+                            ),
+
                           ),
+
                           validator: (val) => val!.isEmpty? 'Enter your zip code' : null ,
                           onChanged: (val){
                             setState(()=> zipCode = val);
