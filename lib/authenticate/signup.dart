@@ -5,8 +5,8 @@ import 'package:task2/home/home.dart';
 import 'package:task2/sharedFile/textInputDecoration.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'login.dart';
-import 'package:country_code_picker/country_code_picker.dart';
-
+// import 'package:country_code_picker/country_code_picker.dart';
+import 'package:address_search_field/address_search_field.dart';
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -28,6 +28,20 @@ class _SignUpState extends State<SignUp> {
   String zipCode = '';
   String checkBoxText = 'I agree to the ';
   bool checked = false;
+
+
+  final origCtrl = TextEditingController();
+
+  final destCtrl = TextEditingController();
+
+  final geoMethods = GeoMethods(
+    /// [Get API key](https://developers.google.com/maps/documentation/embed/get-api-key)
+    googleApiKey: 'GOOGLE_API_KEY',
+    language: 'es-419',
+    countryCode: 'ec',
+  );
+
+
 
   final TextEditingController controller = TextEditingController();
   String initialCountry = 'BD';
@@ -220,17 +234,55 @@ class _SignUpState extends State<SignUp> {
 
                       SizedBox(height: 20.0),
 
-                      TextFormField(
+                      // TextFormField(
+                      //
+                      //     decoration:textInputDecoration.copyWith(
+                      //       hintText: 'City*',
+                      //       suffixIcon: Icon(Icons.search, ),
+                      //     ),
+                      //     validator: (val) => val!.isEmpty? 'Enter your City' : null ,
+                      //     onChanged: (val){
+                      //       setState(()=> city = val);
+                      //
+                      //     }
+                      // ),
 
-                          decoration:textInputDecoration.copyWith(
-                            hintText: 'City*',
-                            suffixIcon: Icon(Icons.search, ),
-                          ),
-                          validator: (val) => val!.isEmpty? 'Enter your City' : null ,
-                          onChanged: (val){
-                            setState(()=> city = val);
+                      // SizedBox(height: 20.0),
 
-                          }
+                      RouteSearchBox(
+                        geoMethods: geoMethods,
+                        originCtrl: origCtrl,
+                        destinationCtrl: destCtrl,
+                        builder: (context, originBuilder, destinationBuilder,
+                            waypointBuilder, waypointsMgr, relocate, getDirections) {
+                          // if (origCtrl.text.isEmpty)
+                          //   relocate(AddressId.origin, _initialPositon.toCoords());
+                          return Container(
+                            //padding: EdgeInsets.symmetric(horizontal: 15.0),
+                            color: Colors.green[50],
+                            //height: 150.0,
+                            child: Column(
+                              children: [
+                                TextFormField(
+                                  decoration:textInputDecoration.copyWith(
+                                    hintText: 'City*',
+                                    suffixIcon: Icon(Icons.search, ),
+                                  ),
+                                  controller: origCtrl,
+                                  onTap: () => showDialog(
+                                    context: context,
+                                    builder: (context) => originBuilder.buildDefault(
+                                      builder: AddressDialogBuilder(),
+                                      onDone: (address) => city,
+                                    ),
+                                  ),
+                                  validator: (val) => val!.isEmpty? 'Enter your City' : null ,
+                                ),
+
+                              ],
+                            ),
+                          );
+                        },
                       ),
 
                       SizedBox(height: 20.0),
