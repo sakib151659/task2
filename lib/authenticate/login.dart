@@ -35,13 +35,16 @@ class _LoginPageState extends State<LoginPage> {
                 CircleAvatar(
                     backgroundColor: HexColor("#0E9AD6"),
                     radius: 18,
-                    child: InkWell(
-                      child: Icon(
-                        Icons.arrow_back_ios, size: 30,
-                      ),
-                      onTap: (){
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+                      child: InkWell(
+                        child: Icon(
+                          Icons.arrow_back_ios, size: 30,
+                        ),
+                        onTap: (){
 
-                      },
+                        },
+                      ),
                     ),
                   ),
 

@@ -31,15 +31,18 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 CircleAvatar(
                   backgroundColor: HexColor("#0E9AD6"),
                   radius: 18,
-                  child: InkWell(
-                    child: Icon(
-                      Icons.arrow_back_ios, size: 30,
-                    ),
-                    onTap: (){
-                      Navigator.of(context).pop();
-                      Navigator.push(context, new MaterialPageRoute(builder: (context) => LoginPage() ));
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                    child: InkWell(
+                      child: Icon(
+                        Icons.arrow_back_ios, size: 30,
+                      ),
+                      onTap: (){
+                        Navigator.of(context).pop();
+                        Navigator.push(context, new MaterialPageRoute(builder: (context) => LoginPage() ));
 
-                    },
+                      },
+                    ),
                   ),
                 ),
 
