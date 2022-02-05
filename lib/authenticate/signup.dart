@@ -309,7 +309,6 @@ class _SignUpState extends State<SignUp> {
                           validator: (val) => val!.isEmpty? 'Enter your zip code' : null ,
                           onChanged: (val){
                             setState(()=> zipCode = val);
-
                           }
 
                       ),

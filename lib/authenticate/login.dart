@@ -87,14 +87,23 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                           decoration:textInputDecoration.copyWith(
                             hintText: 'Password',
-                            suffixIcon: InkWell(
-                                child: Icon(Icons.remove_red_eye, ),
-                              onTap: (){
-                                  setState(() {
-                                    passwordIcon: false;
-                                  });
-                              },
-                            ),
+                            // suffixIcon: InkWell(
+                            //     child: Icon(Icons.remove_red_eye, ),
+                            //   onTap: (){
+                            //       setState(() {
+                            //         passwordIcon: false;
+                            //       });
+                            //   },
+                            // ),
+
+                              suffixIcon: IconButton(
+                                  icon: Icon(
+                                      passwordIcon ? Icons.visibility : Icons.visibility_off),
+                                  onPressed: () {
+                                    setState(() {
+                                      passwordIcon = !passwordIcon;
+                                    });
+                                  })
 
                           ),
 
