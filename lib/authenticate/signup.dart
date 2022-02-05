@@ -29,14 +29,9 @@ class _SignUpState extends State<SignUp> {
   String checkBoxText = 'I agree to the ';
   bool checked = false;
 
-
   final origCtrl = TextEditingController();
-
   final destCtrl = TextEditingController();
-
   final zipcodeController = TextEditingController();
-
-
 
   final geoMethods = GeoMethods(
     /// [Get API key](https://developers.google.com/maps/documentation/embed/get-api-key)

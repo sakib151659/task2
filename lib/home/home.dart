@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:task2/authenticate/login.dart';
@@ -28,11 +27,39 @@ class _HomePageState extends State<HomePage> {
             //onPressed:() => exit(0),
           )
       ),
+
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Text("Welcome Home"),
+          Center(child: Text("Welcome Home")),
+
+
         ],
       ),
+        bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+              boxShadow: [
+                BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30.0),
+                topRight: Radius.circular(30.0),
+              ),
+              child: BottomNavigationBar(
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.favorite), title: Text('Favourite')),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.favorite), title: Text('Favourite'))
+                ],
+              ),
+            )
+        )
     );
   }
 }
